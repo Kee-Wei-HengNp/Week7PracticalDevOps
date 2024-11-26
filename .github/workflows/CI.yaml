@@ -1,37 +1,35 @@
 name: CI Process
-run-name: ${{ github.actor }} is learning GitHub Actions
+run-name: ${{github.actor}} is learning Github Actions
 on: [push]
 jobs:
   behave-testing:
-    # setup of simple OS of choice, i.e. Linux
-    # create VM with ubuntu OS
+    # Setup of simple OS of choice
+    # Create VM with ubuntu OS
     runs-on: ubuntu-latest
-
     steps:
-      # Step 1: Checkout code from repository
+    # Setup of environment for test
       - name: Checkout
-        uses: actions/checkout@v4.2.2
-
-      # Step 2: List files in the repository
+        uses: actions/checkout@v4 
       - name: List repo
         run: |
           ls
-
-      # Step 3: Set up Python environment
-      - name: Set up Python
-        uses: actions/setup-python@v5.3.0
+          
+      # install python
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.13' 
 
-      # Step 4: Install a Python package using pip-install-package-action
-      - name: Install Python package
-        uses: durandtibo/pip-install-package-action@v0.3.1
+      # install behave
+      - name: Setup Behave
+        uses: BSFishy/pip-action@v1
         with:
-          # Specify the package name and version you want to install
-          package-name: behave    # Replace with the actual package name
-          package-version: '1.2.6'  # Replace with the desired version, or leave blank for the latest
-          python-version: '3.9'
-    
-      - name: Run Behave tests
-        run: |
-          behave  # Make sure features/ directory exists in your repo
+          packages: |
+            behave
+
+      # Run behave
+      - name: Run behave test
+        uses: cryptic-wizard/run-behave-tests@v0.4.0
+        with:
+          test-output-name: results.txt
+        
