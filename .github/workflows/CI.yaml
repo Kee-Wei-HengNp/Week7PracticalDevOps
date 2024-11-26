@@ -6,11 +6,22 @@ jobs:
     # Setup a simple OS of choice, i.e., Linux
     # Create VM with Ubuntu OS
     runs-on: ubuntu-latest
+    permissions:
+      issues: write        
+    
+            
 
     steps:
       # Step 1: Checkout code from repository
       - name: Checkout
         uses: actions/checkout@v4.2.2
+      - name: Create an issue
+        uses: dacbd/create-issue-action@main
+        with:
+          token: ${{ github.token}}
+          title: Simple test issue
+          body: my new issue
+        
 
       # Step 2: List files in the repository
       - name: List repo
@@ -34,3 +45,6 @@ jobs:
         uses: cryptic-wizard/run-behave-tests@v0.4.0
         with:
           upload-artifact: true  # Default is true, adjust if needed
+
+
+        
