@@ -8,15 +8,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Setup of environment for test
+      # Step 1: Checkout code from repository
       - name: Checkout
         uses: actions/checkout@v4.2.2
+
+      # Step 2: List files in the repository
       - name: List repo
         run: |
           ls
 
-    #Set up toos necessary for testing, search  from marketplace
-      - name: Setup Python
+      # Step 3: Set up Python environment
+      - name: Set up Python
         uses: actions/setup-python@v5.3.0
         with:
           python-version: '3.9'
+
+      # Step 4: Install a Python package using pip-install-package-action
+      - name: Install Python package
+        uses: durandtibo/pip-install-package-action@v0.3.1
+        with:
+          # Specify the package name and version you want to install
+          package-name: behave    # Replace with the actual package name
+          package-version: '1.2.6'  # Replace with the desired version, or leave blank for the latest
+          python-version: '3.9'
+    
+      - name: Run Behave tests
+        run: |
+          behave  # Make sure features/ directory exists in your repo
