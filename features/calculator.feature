@@ -19,4 +19,4 @@ Feature: Calculator
   Scenario: Division
     Given the calculator is initialized
     When I divide 10 by 2
-    Then the result should be 4
+    Then the result should be 5
