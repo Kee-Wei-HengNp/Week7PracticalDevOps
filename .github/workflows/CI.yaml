@@ -61,7 +61,7 @@ jobs:
       - name: Prepare files
         run: |
           mkdir -p release
-          cp -r ./calculator.py ./release/calculator-epv.py
+          cp -r ./calculator.py ./release/WeiHeng.py
           echo "Deployment files prepared."
           ls -l ./release/
 
