@@ -4,7 +4,7 @@ Feature: Calculator
   Scenario: Addition
     Given the calculator is initialized
     When I add 10 and 5
-    Then the result should be 10 ( this is where the error is)
+    Then the result should be 15
 
   Scenario: Subtraction
     Given the calculator is initialized
